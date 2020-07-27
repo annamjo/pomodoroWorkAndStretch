@@ -1,0 +1,21 @@
+{
+	"manifest_version": 2,
+	"name": "Pomodoro Work + Stretch",
+	"version": "0.0.1",
+	"description": "25 minutes of productivity and 5 minutes of desk-friendly stretches with correct form detection.",
+	"background": {
+		"scripts": ["js/background.js"]
+	},
+	"homepage_url": "https://workandstretch.glitch.me",
+	"short_name": "Work+Stretch",
+	"permissions": [
+		"tabs",
+		"storage",
+		"alarms",
+		"https://workandstretch.glitch.me"
+	],
+	"browser_action": {
+		"default_title": "Stretch Break",
+		"default_popup": "popup.html"
+	}
+}
