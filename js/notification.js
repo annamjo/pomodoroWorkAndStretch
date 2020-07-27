@@ -26,7 +26,7 @@ function startTimer(duration, display) {
 }
 
 window.onload = function () {
-	const fiveMinute = 60 * 5,
+	let fiveMinute = 60 * 5,
 		display = document.querySelector('#timer'); //!!!need to add this id on notification.html
 	startTimer(fiveMinute, display);
 };
