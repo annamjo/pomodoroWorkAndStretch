@@ -1,3 +1,6 @@
+// get URL of logo image
+chrome.extension.getURL('/assets/reclogoa.png');
+
 let display;
 
 // listens for changes in timeLeft var from background.js timer & changes timer on extension
@@ -40,3 +43,7 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 window.onload = function () {
 	display = document.querySelector('#time');
 };
+
+// get and save on or off preference
+let onOffButton = document.getElementsByClassName('onoffswitch-inner')[0];
+console.log(onOffButton);

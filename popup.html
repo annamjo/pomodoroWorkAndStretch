@@ -14,20 +14,54 @@
 		<link rel="stylesheet" href="./css/popup.css" />
 	</head>
 	<body>
-		<div class="header">Stretch Reminder</div>
-		<p>Pomodoro Style</p>
-		<hr />
-		<p>Next 5-min stretch break in:</p>
-		<p id="time"></p>
+		<center>
+			<img id="logoImage" src="assets/reclogoa.png" alt="Work + Stretch" />
 
-		<!--[if lt IE 7]>
-			<p class="browsehappy">
-				You are using an <strong>outdated</strong> browser. Please
-				<a href="#">upgrade your browser</a> to improve your experience.
-			</p>
-		<![endif]-->
+			<div id="timerSection">
+				<p id="timerLabel">You got this! Next stretch break in:</p>
+				<p id="time"></p>
+				<p id="minuteLabel">minutes</p>
+			</div>
 
-		<!-- <script src="./js/background.js" async defer></script> -->
-		<script src="./js/popup.js" async defer></script>
+			<div id="toggles">
+				<input
+					type="checkbox"
+					name="checkbox1"
+					id="checkbox1"
+					class="ios-toggle"
+					checked
+				/><label
+					for="checkbox1"
+					class="checkbox-label"
+					data-off="disabled"
+					data-on="enabled"
+				></label>
+			</div>
+
+			<!-- <div class="onoffswitch">
+				<input
+					type="checkbox"
+					name="onoffswitch"
+					class="onoffswitch-checkbox"
+					id="myonoffswitch"
+					tabindex="0"
+					checked
+				/>
+				<label class="onoffswitch-label" for="myonoffswitch">
+					<span class="onoffswitch-inner"></span>
+					<span class="onoffswitch-switch"></span>
+				</label>
+			</div> -->
+
+			<!--[if lt IE 7]>
+				<p class="browsehappy">
+					You are using an <strong>outdated</strong> browser. Please
+					<a href="#">upgrade your browser</a> to improve your experience.
+				</p>
+			<![endif]-->
+
+			<!-- <script src="./js/background.js" async defer></script> -->
+			<script src="./js/popup.js" async defer></script>
+		</center>
 	</body>
 </html>

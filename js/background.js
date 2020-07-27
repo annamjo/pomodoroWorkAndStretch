@@ -1,5 +1,8 @@
+let freq;
+
 // when open chrome browser, start alarm at 25 min
-createAlarm(25);
+freq = 25;
+createAlarm(freq);
 let timeLeft; //in min
 
 function createAlarm(freq) {
@@ -14,6 +17,9 @@ function createAlarm(freq) {
 		when: Date().now,
 		periodInMinutes: freq,
 	});
+
+	// add in 5 min break
+	freq = 30;
 }
 
 function openNotification() {
