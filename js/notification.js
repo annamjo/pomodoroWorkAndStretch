@@ -1,5 +1,5 @@
-// This code will work for the pop-up 5 minute feature on notification
 
+//allows for 5 minute timer for the duration of stretch break
 function startTimer(duration, display) {
 	let timer = duration;
 	let minutes;
@@ -20,13 +20,30 @@ function startTimer(duration, display) {
 
 		// if done, reset
 		if (--timer < 0) {
-			timer = duration;
+			timer = 0;
 		}
 	}, 1000);
 }
 
 window.onload = function () {
 	let fiveMinute = 60 * 5,
-		display = document.querySelector('#timer'); //!!!need to add this id on notification.html
+	display = document.querySelector('#timer'); //added this 'timer' id on notification.html
 	startTimer(fiveMinute, display);
 };
+
+navigator.permissions.query({name: 'microphone'})
+ .then((permissionObj) => {
+  console.log(permissionObj.state);
+ })
+ .catch((error) => {
+  console.log('Got error :', error);
+ })
+
+ navigator.permissions.query({name: 'camera'})
+ .then((permissionObj) => {
+  console.log(permissionObj.state);
+ })
+ .catch((error) => {
+  console.log('Got error :', error);
+ })
+
