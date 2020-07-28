@@ -10,6 +10,8 @@ chrome.storage.local.get(['on'], function (result) {
 		if (!result.on) {
 			document.getElementById('checkbox1').checked = false; //off
 			isOn = false;
+			display.textContent = 'turn on';
+			updateDisplay();
 		} else {
 			document.getElementById('checkbox1').checked = true; //on
 			isOn = true;
@@ -31,6 +33,8 @@ document.getElementById('checkbox1').onclick = function () {
 			console.log('On set to false.');
 		});
 		isOn = false;
+		display.textContent = 'turn on';
+		updateDisplay();
 	} else {
 		// currently says off
 		chrome.storage.local.set({ on: true }, function () {
