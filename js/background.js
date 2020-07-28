@@ -1,9 +1,58 @@
-let freq;
+let freq; //in min
+let timeLeft; //in secs
+let isOn; //true or false
+let timeOut;
+let secondTimeout;
 
-// when open chrome browser, start alarm at 25 min
-freq = 25;
-createAlarm(freq);
-let timeLeft; //in min
+// check when first open
+chrome.storage.local.get(['on'], function (result) {
+	if (result.on === true) {
+		isOn = true;
+		startAlarmAndNotif();
+	} else if (result.on === false) {
+		isOn = false;
+	} else {
+		isOn = true;
+	}
+});
+
+// updates when user updates
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+	for (let key in changes) {
+		if (key === 'on') {
+			let storageChange = changes[key];
+			isOn = storageChange.newValue; //true or false
+			if (isOn) {
+				startAlarmAndNotif();
+			} else {
+				// cancel the last timer
+				clearTimeout(timeOut);
+				clearTimeout(secondTimeout);
+				// cancel the chrome alarm
+				chrome.alarms.clearAll();
+				console.log('Clear alarms.');
+			}
+
+			//printing changes in console
+			console.log(
+				'Storage key "%s" in namespace "%s" changed. ' +
+					'Old value was "%s", new value is "%s".',
+				key,
+				namespace,
+				storageChange.oldValue,
+				storageChange.newValue
+			);
+		}
+	}
+});
+
+function startAlarmAndNotif() {
+	freq = 1; //25
+	console.log('set alarm freq to ' + freq);
+	timeLeft = 60; //1500
+	createAlarm(freq);
+	// timer in sec for onscreen
+}
 
 function createAlarm(freq) {
 	// start the background timer
@@ -11,6 +60,7 @@ function createAlarm(freq) {
 
 	// clears past notif alarms on chrome
 	chrome.alarms.clearAll();
+	console.log('Cleared all chrome alarms.');
 
 	// creates a new notif alarm
 	chrome.alarms.create('alarmStart', {
@@ -18,9 +68,18 @@ function createAlarm(freq) {
 		periodInMinutes: freq,
 	});
 
-	// add in 5 min break
-	freq = 30;
+	console.log('New chrome alarm set at ' + freq + ' minutes');
 }
+
+// listen for alarm and open the notif popup
+chrome.alarms.onAlarm.addListener(function (alarm) {
+	openNotification();
+	chrome.alarms.clearAll();
+	chrome.alarms.create('alarmStart', {
+		when: Date().now,
+		periodInMinutes: 2,
+	});
+});
 
 function openNotification() {
 	var popupUrl = chrome.runtime.getURL('/notification.html');
@@ -41,29 +100,23 @@ function openNotification() {
 	});
 }
 
-// listen for alarm and open the notif popup if extension is enabled
-chrome.alarms.onAlarm.addListener(function (alarm) {
-	//************always open for now, need to implement the on/off button fcn here & in popup.js
-	openNotification();
-});
-
 // Start a background timer seperate from the chrome alarm
 function startBackgroundTimer() {
-	let timeLeft = 1500; //in secs
-	console.log('Starting timer at ' + timeLeft + ' minutes.');
+	//clear the last timer
+	clearTimeout(timeOut);
+
+	console.log('Starting timer at ' + timeLeft + ' seconds.');
 	chrome.storage.local.set({ TIME_LEFT: timeLeft }, function () {
-		console.log('timeLeft is saved: ' + timeLeft + ' min');
+		console.log('timeLeft is saved: ' + timeLeft + ' seconds');
 	});
 
 	const interval = 1000; //decreasing interval is every sec
 	let endTime = Date.now() + interval; //next endTime is 1 min from now
 
 	// after one min, execute step() fcn
-	setTimeout(step, interval);
+	timeOut = setTimeout(step, interval);
 
 	function step() {
-		//************if disabled, return fcn
-
 		// how much time has passed
 		let dt = Date.now() - endTime;
 
@@ -85,11 +138,11 @@ function startBackgroundTimer() {
 		endTime += interval;
 
 		//after one min, execute step() fcn to decrease timeLeft again
-		setTimeout(step, Math.max(0, interval - dt));
+		secondTimeout = setTimeout(step, Math.max(0, interval - dt));
 
 		if (timeLeft <= 0) {
 			//resets timer, with 5 extra minute for stretch
-			timeLeft = 1800;
+			timeLeft = 120; //1800
 		}
 	}
 }
