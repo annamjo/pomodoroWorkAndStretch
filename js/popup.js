@@ -49,10 +49,12 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			time = storageChange.newValue;
 			if (isOn) {
 				//what is the diff between undefined & null here?
-				if (time > 1500) {
+				if (time > 60) {
+					//1500
 					display.textContent = 'stretch';
 					updateDisplay();
-				} else if (time <= 1500) {
+				} else if (time <= 60) {
+					//1500
 					// convert newValue to time & seconds display
 					let minutes = Math.floor(time / 60);
 					let seconds = time % 60;

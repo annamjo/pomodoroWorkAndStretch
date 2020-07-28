@@ -1,7 +1,8 @@
 let freq; //in min
-let timeLeft; //in min
-let isOn;
+let timeLeft; //in secs
+let isOn; //true or false
 let timeOut;
+let secondTimeout;
 
 // check when first open
 chrome.storage.local.get(['on'], function (result) {
@@ -15,10 +16,6 @@ chrome.storage.local.get(['on'], function (result) {
 	}
 });
 
-if (isOn) {
-	startAlarmAndNotif();
-}
-
 // updates when user updates
 chrome.storage.onChanged.addListener(function (changes, namespace) {
 	for (let key in changes) {
@@ -27,10 +24,10 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			isOn = storageChange.newValue; //true or false
 			if (isOn) {
 				startAlarmAndNotif();
-				clearTimeout(timeOut);
 			} else {
 				// cancel the last timer
 				clearTimeout(timeOut);
+				clearTimeout(secondTimeout);
 				// cancel the chrome alarm
 				chrome.alarms.clearAll();
 				console.log('Clear alarms.');
@@ -50,11 +47,11 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 });
 
 function startAlarmAndNotif() {
-	// start chrome alarm at 25 on first launch
-	freq = 25;
+	freq = 1; //25
+	console.log('set alarm freq to ' + freq);
+	timeLeft = 60; //1500
 	createAlarm(freq);
 	// timer in sec for onscreen
-	timeLeft = 1500;
 }
 
 function createAlarm(freq) {
@@ -71,15 +68,17 @@ function createAlarm(freq) {
 		periodInMinutes: freq,
 	});
 
-	console.log('New chrome alarm set.');
-
-	// add in 5 min break for next alarm
-	freq = 30;
+	console.log('New chrome alarm set at ' + freq + ' minutes');
 }
 
 // listen for alarm and open the notif popup
 chrome.alarms.onAlarm.addListener(function (alarm) {
 	openNotification();
+	chrome.alarms.clearAll();
+	chrome.alarms.create('alarmStart', {
+		when: Date().now,
+		periodInMinutes: 2,
+	});
 });
 
 function openNotification() {
@@ -106,9 +105,9 @@ function startBackgroundTimer() {
 	//clear the last timer
 	clearTimeout(timeOut);
 
-	console.log('Starting timer at ' + timeLeft + ' minutes.');
+	console.log('Starting timer at ' + timeLeft + ' seconds.');
 	chrome.storage.local.set({ TIME_LEFT: timeLeft }, function () {
-		console.log('timeLeft is saved: ' + timeLeft + ' min');
+		console.log('timeLeft is saved: ' + timeLeft + ' seconds');
 	});
 
 	const interval = 1000; //decreasing interval is every sec
@@ -116,7 +115,6 @@ function startBackgroundTimer() {
 
 	// after one min, execute step() fcn
 	timeOut = setTimeout(step, interval);
-	timeOut;
 
 	function step() {
 		// how much time has passed
@@ -140,11 +138,11 @@ function startBackgroundTimer() {
 		endTime += interval;
 
 		//after one min, execute step() fcn to decrease timeLeft again
-		setTimeout(step, Math.max(0, interval - dt));
+		secondTimeout = setTimeout(step, Math.max(0, interval - dt));
 
 		if (timeLeft <= 0) {
 			//resets timer, with 5 extra minute for stretch
-			timeLeft = 1800;
+			timeLeft = 120; //1800
 		}
 	}
 }
