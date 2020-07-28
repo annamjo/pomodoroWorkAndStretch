@@ -12,7 +12,8 @@
 		"tabs",
 		"storage",
 		"alarms",
-		"https://workandstretch.glitch.me"
+		"https://workandstretch.glitch.me",
+		"https://webcam-teachable.glitch.me/"
 	],
 	"browser_action": {
 		"default_title": "Stretch Break",
