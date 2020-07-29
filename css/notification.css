@@ -1,22 +1,15 @@
-body, html{
-    margin: 0; 
-    padding: 0; 
-    height: 100%; 
-    overflow: hidden;
+body,
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
 }
 
-#content
-{
-    position:absolute; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; 
-    top: 0px; 
-}
-
-body { 
-    margin-bottom: 75px; 
-    font-family: 'Verdana', sans-serif; 
-    text-align: center; 
-    font-size: 18px; 
+#content {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0px;
 }

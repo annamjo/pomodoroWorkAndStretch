@@ -1,10 +1,10 @@
-let freq; //in min
-let timeLeft; //in secs
+let freq; //in min (for chrome alarm)
+let timeLeft; //in secs (for onscreen timer)
 let isOn; //true or false
 let timeOut;
 let secondTimeout;
 
-// check when first open
+// check on or off when first open
 chrome.storage.local.get(['on'], function (result) {
 	if (result.on === true) {
 		isOn = true;
@@ -12,11 +12,12 @@ chrome.storage.local.get(['on'], function (result) {
 	} else if (result.on === false) {
 		isOn = false;
 	} else {
+		//auto on for first download
 		isOn = true;
 	}
 });
 
-// updates when user updates
+// updates when user choose on/off settings
 chrome.storage.onChanged.addListener(function (changes, namespace) {
 	for (let key in changes) {
 		if (key === 'on') {
@@ -34,24 +35,23 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			}
 
 			//printing changes in console
-			console.log(
-				'Storage key "%s" in namespace "%s" changed. ' +
-					'Old value was "%s", new value is "%s".',
-				key,
-				namespace,
-				storageChange.oldValue,
-				storageChange.newValue
-			);
+			// console.log(
+			// 	'Storage key "%s" in namespace "%s" changed. ' +
+			// 		'Old value was "%s", new value is "%s".',
+			// 	key,
+			// 	namespace,
+			// 	storageChange.oldValue,
+			// 	storageChange.newValue
+			// );
 		}
 	}
 });
 
 function startAlarmAndNotif() {
 	freq = 1; //25
-	console.log('set alarm freq to ' + freq);
+	// console.log('set alarm freq to ' + freq);
 	timeLeft = 60; //1500
 	createAlarm(freq);
-	// timer in sec for onscreen
 }
 
 function createAlarm(freq) {
@@ -68,16 +68,17 @@ function createAlarm(freq) {
 		periodInMinutes: freq,
 	});
 
-	console.log('New chrome alarm set at ' + freq + ' minutes');
+	// console.log('New chrome alarm set at ' + freq + ' minutes');
 }
 
 // listen for alarm and open the notif popup
 chrome.alarms.onAlarm.addListener(function (alarm) {
 	openNotification();
+	// clear old alarm and add 30 min (account for 5 break)
 	chrome.alarms.clearAll();
 	chrome.alarms.create('alarmStart', {
 		when: Date().now,
-		periodInMinutes: 2,
+		periodInMinutes: 2, //30
 	});
 });
 
@@ -92,22 +93,22 @@ function openNotification() {
 		chrome.windows.create({
 			url: 'notification.html',
 			type: 'popup',
-			width: 1150,
-			height: 720,
+			width: 1200,
+			height: 750,
 			top: 20,
 			left: 20,
 		});
 	});
 }
 
-// Start a background timer seperate from the chrome alarm
+// Start a background timer seperate from the chrome alarm for front-end
 function startBackgroundTimer() {
 	//clear the last timer
 	clearTimeout(timeOut);
 
-	console.log('Starting timer at ' + timeLeft + ' seconds.');
+	// console.log('Starting timer at ' + timeLeft + ' seconds.');
 	chrome.storage.local.set({ TIME_LEFT: timeLeft }, function () {
-		console.log('timeLeft is saved: ' + timeLeft + ' seconds');
+		// console.log('timeLeft is saved: ' + timeLeft + ' seconds');
 	});
 
 	const interval = 1000; //decreasing interval is every sec
@@ -127,11 +128,11 @@ function startBackgroundTimer() {
 
 		//decrease the time left by 1 min
 		timeLeft--;
-		console.log(timeLeft);
+		// console.log(timeLeft);
 
 		// save the new timeLeft to local storage (in user chrome browser)
 		chrome.storage.local.set({ TIME_LEFT: timeLeft }, function () {
-			console.log('timeLeft is saved: ' + timeLeft + 'min');
+			// console.log('timeLeft is saved: ' + timeLeft + 'min');
 		});
 
 		//increase the endTime by 1 more min

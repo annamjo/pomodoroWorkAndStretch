@@ -1,8 +1,8 @@
-// load URL of logo image-is this needed?
+// load URL of logo image
 chrome.extension.getURL('/assets/reclogoa.png');
 
-let display;
-let isOn;
+let display; //timer display
+let isOn; //true or false
 
 // check if extension on or off
 chrome.storage.local.get(['on'], function (result) {
@@ -19,18 +19,18 @@ chrome.storage.local.get(['on'], function (result) {
 	} else {
 		//on auto on first launch
 		chrome.storage.local.set({ on: true }, function () {
-			console.log('On set to true.');
+			// console.log('On set to true.');
 		});
 		document.getElementById('checkbox1').checked = true;
 		isOn = true;
 	}
 });
 
-// update on or off preference when changed
+// update on or off preference when clicked
 document.getElementById('checkbox1').onclick = function () {
 	if (document.getElementById('checkbox1').checked === false) {
 		chrome.storage.local.set({ on: false }, function () {
-			console.log('On set to false.');
+			// console.log('On set to false.');
 		});
 		isOn = false;
 		display.textContent = 'turn on';
@@ -38,13 +38,13 @@ document.getElementById('checkbox1').onclick = function () {
 	} else {
 		// currently says off
 		chrome.storage.local.set({ on: true }, function () {
-			console.log('On set to true.');
+			// console.log('On set to true.');
 		});
 		isOn = true;
 	}
 };
 
-// listens for changes in timeLeft var from background.js timer & changes timer on extension
+// listens for changes in timeLeft var from background.js timer & update display on inferface
 chrome.storage.onChanged.addListener(function (changes, namespace) {
 	for (let key in changes) {
 		if (key === 'TIME_LEFT') {
@@ -52,7 +52,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			let storageChange = changes[key];
 			time = storageChange.newValue;
 			if (isOn) {
-				//what is the diff between undefined & null here?
 				if (time > 60) {
 					//1500
 					display.textContent = 'stretch';
@@ -66,7 +65,7 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 					function str_pad_left(string, pad, length) {
 						return (new Array(length + 1).join(pad) + string).slice(-length);
 					}
-					var finalTime =
+					let finalTime =
 						str_pad_left(minutes, '0', 2) + ':' + str_pad_left(seconds, '0', 2);
 					//set display to new updated time
 					display.textContent = finalTime;
@@ -78,19 +77,19 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			}
 
 			//printing changes in console
-			console.log(
-				'Storage key "%s" in namespace "%s" changed. ' +
-					'Old value was "%s", new value is "%s".',
-				key,
-				namespace,
-				storageChange.oldValue,
-				storageChange.newValue
-			);
+			// console.log(
+			// 	'Storage key "%s" in namespace "%s" changed. ' +
+			// 		'Old value was "%s", new value is "%s".',
+			// 	key,
+			// 	namespace,
+			// 	storageChange.oldValue,
+			// 	storageChange.newValue
+			// );
 		}
 	}
 });
 
-//when user opens extension, shows how much time left (by minutes)
+//when user opens extension, update display
 window.onload = function () {
 	updateDisplay();
 };
