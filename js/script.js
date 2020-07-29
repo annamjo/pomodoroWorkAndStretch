@@ -11,20 +11,20 @@ let stretchdata;
 let classifier;
 let modelURL = 'https://storage.googleapis.com/tm-models/YadBJmj5/';
 
-// STEP 1: Load the model!
-function preload() {
-  classifier = ml5.imageClassifier(modelURL + 'model.json');
-}
+// // STEP 1: Load the model!
+// function preload() {
+//   classifier = ml5.imageClassifier(modelURL + 'model.json');
+// }
 
-function setup() {
-  let c = createCanvas(640, 500);
-  c.position(8.75*width/10, height/8);
-  c.style('border-radius: 6px')
-  // Create the video
+// function setup() {
+//   let c = createCanvas(640, 500);
+//   c.position(8.75*width/10, height/8);
+//   c.style('border-radius: 6px')
+//   // Create the video
   
-  webcam = createCapture(VIDEO);
-  webcam.hide();
-}
+//   webcam = createCapture(VIDEO);
+//   webcam.hide();
+// }
 
 
 function draw() {
