@@ -3,6 +3,11 @@
 	"name": "Pomodoro Work and Stretch",
 	"version": "0.0.1",
 	"description": "25 minutes of productivity and 5 minutes of desk-friendly stretches with correct form detection.",
+	"icons": { "16": "assets/favicon-16x16.png",
+		"32": "assets/favicon-32x32.png",
+		"48": "assets/logo-48x48.png",
+		"128": "assets/logo-128x128.png"
+	 },
 	"background": {
 		"scripts": ["js/background.js"]
 	},
@@ -16,6 +21,12 @@
 		"https://stretchmachine.glitch.me/"
 	],
 	"browser_action": {
+		"default_icon": {
+			"16": "assets/favicon-16x16.png",
+			"32": "assets/favicon-32x32.png",
+			"48": "assets/logo-48x48.png",
+			"128": "assets/logo-128x128.png"
+		},
 		"default_title": "Stretch Break",
 		"default_popup": "popup.html"
 	},
