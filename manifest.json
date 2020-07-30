@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "Pomodoro Work and Stretch",
+	"name": "Pomodoro Work + Stretch",
 	"version": "0.1.0",
 	"description": "25 minutes of productivity and 5 minutes of desk-friendly stretches — with correct exercise form detection.",
 	"icons": {
