@@ -4,7 +4,7 @@ The AI-powered chrome extension that boosts your remote work wellbeing and produ
 
 How it works: 25 minutes of productivity and 5 minutes of desk-friendly stretches — with correct exercise form detection.
 
-View the homepage: https://sites.google.com/view/pomodoroworkandstretch/
+View the homepage: https://bit.ly/pomodoroworkandstretch
 
 # Install
 
