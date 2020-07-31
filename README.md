@@ -1,12 +1,26 @@
-The AI-powered chrome extension that boost your remote work wellbeing and productivity.
+# About
+
+The AI-powered chrome extension that boosts your remote work wellbeing and productivity.
 
 How it works: 25 minutes of productivity and 5 minutes of desk-friendly stretches — with correct exercise form detection.
 
-Download from the Chrome Web Store here: coming soon
-
 View the homepage: https://sites.google.com/view/pomodoroworkandstretch/
 
-Tools we use:
+# Install
+
+Download from the Chrome Web Store here: coming soon
+
+# Demo
+
+![Screenshot 1](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/1.png?raw=true)
+
+![Screenshot 2](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/2.png?raw=true)
+
+![Screenshot 3](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/3.png?raw=true)
+
+![Screenshot 4](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/4.png?raw=true)
+
+# Tools we use:
 
 - Tensorflow PoseNet Model
 - Teachable Machine
@@ -16,5 +30,4 @@ Tools we use:
 - Github/Git
 - VSCode
 - Glitch
-
-All exercises are taken from Darebee.
+- All exercises are taken from Darebee
