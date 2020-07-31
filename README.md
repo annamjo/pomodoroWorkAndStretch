@@ -12,13 +12,13 @@ Download from the Chrome Web Store here: coming soon
 
 # Demo
 
-![Screenshot 1](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/1.png?raw=true)
+![Screenshot 1](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/External%20Files/Webstore%20Screenshots/1.png?raw=true)
 
-![Screenshot 2](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/2.png?raw=true)
+![Screenshot 2](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/External%20Files/Webstore%20Screenshots/2.png?raw=true)
 
-![Screenshot 3](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/3.png?raw=true)
+![Screenshot 3](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/External%20Files/Webstore%20Screenshots/3.png?raw=true)
 
-![Screenshot 4](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/Outside%20Files/Webstore%20Screenshots/4.png?raw=true)
+![Screenshot 4](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/External%20Files/Webstore%20Screenshots/4.png?raw=true)
 
 # Tools we use:
 
