@@ -48,9 +48,9 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 });
 
 function startAlarmAndNotif() {
-	freq = 1; //25
+	freq = 25; //1, 25
 	// console.log('set alarm freq to ' + freq);
-	timeLeft = 60; //1500
+	timeLeft = 1500; //60, 1500
 	createAlarm(freq);
 }
 
@@ -78,7 +78,7 @@ chrome.alarms.onAlarm.addListener(function (alarm) {
 	chrome.alarms.clearAll();
 	chrome.alarms.create('alarmStart', {
 		when: Date().now,
-		periodInMinutes: 2, //30
+		periodInMinutes: 30, //2, 30
 	});
 });
 
@@ -143,7 +143,7 @@ function startBackgroundTimer() {
 
 		if (timeLeft <= 0) {
 			//resets timer, with 5 extra minute for stretch
-			timeLeft = 120; //1800
+			timeLeft = 1800; //120, 1800
 		}
 	}
 }
