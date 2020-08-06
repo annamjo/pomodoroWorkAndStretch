@@ -8,7 +8,7 @@ View the homepage: https://bit.ly/pomodoroworkandstretch
 
 # Install
 
-Download from the Chrome Web Store here: coming soon
+Download from the Chrome Web Store here: http://bit.ly/getwands
 
 # Demo
 
