@@ -18,7 +18,7 @@ Download from the Chrome Web Store here: http://bit.ly/getwands
 
 ![Screenshot 3](https://github.com/trannble/pomodoroWorkAndStretch/blob/master/External%20Files/Webstore%20Screenshots/3.png?raw=true)
 
-![demo gif](https://media.giphy.com/media/l1fKgiUFSGHVsGiC7P/giphy.gif)
+<img src="https://media.giphy.com/media/l1fKgiUFSGHVsGiC7P/giphy.gif" width="481"/>
 
 # Tools we use:
 
